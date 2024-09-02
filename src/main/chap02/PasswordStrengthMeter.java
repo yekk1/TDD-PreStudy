@@ -7,10 +7,8 @@ public class PasswordStrengthMeter {
     // 모두 충족: 강함 / 2개: 보통 / 1개 이하: 약함
     public PasswordStrength meter(String s){
         if(s == null || s.isEmpty()) return PasswordStrength.INVALID;
-        int metCounts = 0;
-        if(s.length() >= 8) metCounts++;
-        if(meetsContainingNumberCriteria(s)) metCounts++;
-        if(meetsContainingUppercaseCriteria(s)) metCounts++;
+
+        int metCounts = getMetCriteriaCounts(s);
 
         if(metCounts <= 1) return PasswordStrength.WEEK;
         if(metCounts == 2) return PasswordStrength.NORMAL;
@@ -33,5 +31,13 @@ public class PasswordStrengthMeter {
             }
         }
         return false;
+    }
+
+    private int getMetCriteriaCounts(String s) {
+        int metCounts = 0;
+        if(s.length() >= 8) metCounts++;
+        if(meetsContainingNumberCriteria(s)) metCounts++;
+        if(meetsContainingUppercaseCriteria(s)) metCounts++;
+        return metCounts;
     }
 }
