@@ -1,25 +1,19 @@
 package chap02;
 
 public class PasswordStrengthMeter {
+    // 길이가 8글자 이상
+    // 0부터 9사이의 숫자를 포함
+    // 대문자 포함
+    // 모두 충족: 강함 / 2개: 보통 / 1개 이하: 약함
     public PasswordStrength meter(String s){
         if(s == null || s.isEmpty()) return PasswordStrength.INVALID;
-        boolean lengthEnough = s.length() >= 8;
-        boolean containsNum = meetsContainingNumberCriteria(s);
-        boolean containsUpp = meetsContainingUppercaseCriteria(s);
+        int metCounts = 0;
+        if(s.length() >= 8) metCounts++;
+        if(meetsContainingNumberCriteria(s)) metCounts++;
+        if(meetsContainingUppercaseCriteria(s)) metCounts++;
 
-        if (lengthEnough && !containsNum && !containsUpp)
-            return PasswordStrength.WEEK;
-        if (!lengthEnough && containsNum && !containsUpp)
-            return PasswordStrength.WEEK;
-        if (!lengthEnough && !containsNum && containsUpp)
-            return PasswordStrength.WEEK;
-
-        if(!lengthEnough) {
-            return PasswordStrength.NORMAL;
-        }
-        if(!containsNum) return PasswordStrength.NORMAL;
-        if(!containsUpp) return PasswordStrength.NORMAL;
-
+        if(metCounts == 1) return PasswordStrength.WEEK;
+        if(metCounts == 2) return PasswordStrength.NORMAL;
         return PasswordStrength.STRONG;
     }
 
