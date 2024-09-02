@@ -37,4 +37,39 @@ public class PasswordStrengthMeterTest {
     void meetsOtherCriteria_except_for_number_Then_Normal() {
         assertStrength("ab!@ABqwer", PasswordStrength.NORMAL);
     }
+
+    @Test
+    @DisplayName("얌호로 null 값을 받았을 때")
+    void nullInput_Then_INVALID() {
+        assertStrength(null, PasswordStrength.INVALID);
+    }
+
+    @Test
+    @DisplayName("암호로 빈 값을 받았을 때")
+    void emptynput_Then_INVALID() {
+        assertStrength("", PasswordStrength.INVALID);
+    }
+
+    @Test
+    @DisplayName("대문자를 포함하지 않고 나머지 조건을 충족하는 암호")
+    void meetsOtherCriteria_except_for_Uppercase_Then_Normal() {
+        assertStrength("ab12!@df", PasswordStrength.NORMAL);
+    }
+
+    @Test
+    @DisplayName("길이가 8글자 이상인 조건만 충족하는 암호")
+    void meetsOnlyLengthCriteria_Then_Weak(){
+        assertStrength("abdefghi", PasswordStrength.WEEK);
+    }
+
+    @Test
+    @DisplayName("숫자 포함 조건만 충족하는 암호")
+    void meetsOnlyNumCriteria_Then_Week() {
+        assertStrength("12345", PasswordStrength.WEEK);
+    }
+    @Test
+    @DisplayName("대문자 포함 조건만 충족하는 암호")
+    void meetsOnlyUpperCriteria_Then_Week() {
+        assertStrength("ABZEF", PasswordStrength.WEEK);
+    }
 }
