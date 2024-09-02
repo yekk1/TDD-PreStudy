@@ -72,4 +72,10 @@ public class PasswordStrengthMeterTest {
     void meetsOnlyUpperCriteria_Then_Week() {
         assertStrength("ABZEF", PasswordStrength.WEEK);
     }
+
+    @Test
+    @DisplayName("아무 조건도 충족하지 않는 암호")
+    void meetsNoCriteria_Then_Week() {
+        assertStrength("abc", PasswordStrength.WEEK);
+    }
 }
