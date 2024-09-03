@@ -1,4 +1,4 @@
-package chap01_idea;
+package org.chap01_idea;
 
 import org.junit.jupiter.api.Test;
 

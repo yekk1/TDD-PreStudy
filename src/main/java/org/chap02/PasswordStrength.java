@@ -1,4 +1,4 @@
-package chap02;
+package org.chap02;
 
 public enum PasswordStrength {
     INVALID,

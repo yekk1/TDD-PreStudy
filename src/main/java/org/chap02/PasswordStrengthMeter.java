@@ -1,4 +1,4 @@
-package chap02;
+package org.chap02;
 
 public class PasswordStrengthMeter {
     // 길이가 8글자 이상
